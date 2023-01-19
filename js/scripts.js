@@ -1,7 +1,12 @@
 // Utility Logic
 
-function isEmpty(testString) {
-  return (testString.trim().length === 0);
+function isEmpty() {
+  for (let i=0; i < arguments.length; i++) {
+    if (arguments[i].trim().length === 0) {
+    return true;
+    }
+  }
+  return false;
 }
 
 // Business Logic
@@ -34,6 +39,40 @@ function numberOfOccurrencesInText(word, text) {
   return wordCount;
 }
 
+
+// offensive words WIP:
+// function offensiveWords(text) {
+//   const textArray = text.split(" ");
+//   textArray.forEach(function(element) {
+//     const wordsToExclude = new Set(['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop']);
+//     const words = textArray.filter(word => !wordsToExclude.has(word));
+//     console.log(words);
+//     });
+//   }
+// 
+
+// Offensive word works but bug...WIP: commas in join array present
+function omitOffence(word, text) {
+  const textArray = text.split(" ");
+  const displayArray = [];
+
+  textArray.forEach(function(element) {
+    if (element.toLowerCase().includes(!("zoinks").toLowerCase() || !("muppeteer").toLowerCase() || !("biffaroni").toLowerCase() || !("loopdaloop").toLowerCase()) )
+    { 
+      displayArray.push(element);
+    } else { console.log("No bad words"); }
+
+    console.log("Display arr: ", displayArray);
+    return displayArray.join();// commas 
+  });
+}
+// UI Logic
+
+// if (isEmpty(word, text)) {
+//   return null;
+
+  // <--this above is the updated javascript from page 39 from updating isEmpty into boldPassage-->
+
 function boldPassage(word, text) {
   if (isEmpty(word) || isEmpty(text)) {
     return null;
@@ -54,18 +93,6 @@ function boldPassage(word, text) {
   });
   return p;
 }
-
-// offensive words WIP:
-// function offensiveWords(text) {
-//   const textArray = text.split(" ");
-//   textArray.forEach(function(element) {
-//     const wordsToExclude = new Set(['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop']);
-//     const words = textArray.filter(word => !wordsToExclude.has(word));
-//     console.log(words);
-//     });
-//   }
-
-// UI Logic
 
 function handleFormSubmission() {
   event.preventDefault();
