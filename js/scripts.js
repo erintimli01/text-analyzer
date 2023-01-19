@@ -1,7 +1,13 @@
+// Utility Logic
+
+function isEmpty(testString) {
+  return (testString.trim().length === 0);
+}
+
 // Business Logic
 
 function wordCounter(text) {
-  if (text.trim().length === 0) {
+  if (isEmpty(text)) {
     return 0;
   }
   let wordCount = 0;
@@ -15,7 +21,7 @@ function wordCounter(text) {
 }
 
 function numberOfOccurrencesInText(word, text) {
-  if (word.trim().length === 0) {
+  if (isEmpty(text)) {
     return 0;
   }
   const textArray = text.split(" ");
@@ -28,20 +34,8 @@ function numberOfOccurrencesInText(word, text) {
   return wordCount;
 }
 
-// offensive words WIP:
-// function offensiveWords(text) {
-//   const textArray = text.split(" ");
-//   textArray.forEach(function(element) {
-//     const wordsToExclude = new Set(['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop']);
-//     const words = textArray.filter(word => !wordsToExclude.has(word));
-//     console.log(words);
-//     });
-//   }
-
-// UI Logic
-
 function boldPassage(word, text) {
-  if ((text.trim().length === 0) || (word.trim().length === 0)) {
+  if (isEmpty(word) || isEmpty(text)) {
     return null;
   }
   const p = document.createElement("p");
@@ -61,6 +55,18 @@ function boldPassage(word, text) {
   return p;
 }
 
+// offensive words WIP:
+// function offensiveWords(text) {
+//   const textArray = text.split(" ");
+//   textArray.forEach(function(element) {
+//     const wordsToExclude = new Set(['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop']);
+//     const words = textArray.filter(word => !wordsToExclude.has(word));
+//     console.log(words);
+//     });
+//   }
+
+// UI Logic
+
 function handleFormSubmission() {
   event.preventDefault();
   const passage = document.getElementById("text-passage").value;
@@ -69,8 +75,14 @@ function handleFormSubmission() {
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
   document.getElementById("total-count").innerText = wordCount;
   document.getElementById("selected-count").innerText = occurrencesOfWord;
-}
 
+  let boldedPassage = boldPassage(word, passage);
+    if (boldedPassage) {
+      document.querySelector("div#bolded-passage").append(boldedPassage);
+    } else {
+      document.querySelector("div#bolded-passage").innerText = null;
+    }
+}
 window.addEventListener("load", function() {
   document.querySelector("form#word-counter").addEventListener("submit", handleFormSubmission);
 });
