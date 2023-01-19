@@ -1,4 +1,4 @@
-Describe: wordCounter()
+<!-- Describe: wordCounter() -->
 
 Test: "It should return 1 if a passage has just one word."
 Code:
@@ -24,7 +24,7 @@ Test: "It should not count numbers as words."
 Code: wordCounter("hi there 77 19");
 Expected Output: 2
 
-Describe: numberOfOccurrencesInText()
+<!-- Describe: numberOfOccurrencesInText() -->
 
 Test: "It should return 0 occurrences of a word for an empty string."
 Code:
@@ -68,7 +68,14 @@ const word = "Red";
 numberOfOccurrencesInText(word, text);
 Expected Output: 3
 
-Describe: offensiveWords()
+Test: "If an empty string is passed in as a word, it should return 0."
+Code:
+const word = "";
+const text = "red RED Red!";
+numberOfOccurrencesInText(word, text);
+Expected Output: 0
+
+<!-- Describe: offensiveWords() -->
 
 Test: "It should replace the word zoinks with -"
 Code: 
@@ -77,14 +84,9 @@ const word = "-"
 offensiveWords(text, word)
 Expected Output: "-"
 
-Test: "If an empty string is passed in as a word, it should return 0."
-Code:
-const word = "";
-const text = "red RED Red!";
-numberOfOccurrencesInText(word, text);
-Expected Output: 0
 
-Describe: boldPassage()
+
+<!-- Describe: boldPassage() FOR USER INTERFACE LOGIC, WHICH WE WON'T  HAVE TO DO FOR FRIDAY'S CODE REVIEW, BUT IS GOOD PRACTICE FOR TDD -->
 
 Test: "It should return null if no word or text is entered."
 Code:
