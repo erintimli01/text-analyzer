@@ -67,3 +67,19 @@ const text = "Red! Red. I like red, green, and yellow.";
 const word = "Red";
 numberOfOccurrencesInText(word, text);
 Expected Output: 3
+
+Describe: offensiveWords()
+
+Test: "It should replace the word zoinks with -"
+Code: 
+const text = "zoinks"
+const word = "-"
+offensiveWords(text, word)
+Expected Output: "-"
+
+Test: "If an empty string is passed in as a word, it should return 0."
+Code:
+const word = "";
+const text = "red RED Red!";
+numberOfOccurrencesInText(word, text);
+Expected Output: 0

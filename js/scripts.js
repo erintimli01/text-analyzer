@@ -5,16 +5,19 @@ function wordCounter(text) {
     return 0;
   }
   let wordCount = 0;
-  const textArray = text.split("");
+  const textArray = text.split(" ");
   textArray.forEach(function(element) {
     if (!Number(element)) {
-    wordCount++;
+      wordCount++;
     }
   });
   return wordCount;
 }
 
 function numberOfOccurrencesInText(word, text) {
+  if (word.trim().length === 0) {
+    return 0;
+  }
   const textArray = text.split(" ");
   let wordCount = 0;
   textArray.forEach(function(element) {
@@ -24,3 +27,29 @@ function numberOfOccurrencesInText(word, text) {
   });
   return wordCount;
 }
+
+
+function offensiveWords(text) {
+  const textArray = text.split(" ");
+  textArray.forEach(function(element) {
+    const wordsToExclude = new Set(['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop']);
+    const words = textArray.filter(word => !wordsToExclude.has(word));
+    console.log(words);
+    });
+  }
+
+  //UI LOGIC
+
+  function handleFormSubmission() {
+    event.preventDefault();
+    const passage = document.getElementById("text-passage").value;
+    const word = document.getElementById("word").value;
+    const wordCount = wordCounter(passage);
+    const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
+    document.getElementById("total-count").innerText = wordCount;
+    document.getElementById("selected-count").innerText = occurrencesOfWord;
+  }
+  
+  window.addEventListener("load", function() {
+    document.querySelector("form#word-counter").addEventListener("submit", handleFormSubmission);
+  });
